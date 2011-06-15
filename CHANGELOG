@@ -1,0 +1,10 @@
+1.3
+	[TODO]				Use Log4J
+	[TODO]				Add Build Goal with more than one type of units (Medics, Marines)
+	[TODO]				Do not remove facts as long as they are visible
+	[TODO]				Add Goal to Look for enemies not at a base location
+	[TODO]				Create more than one squads
+	[TODO]				Send units to each base for intel
+	[FEATURE:MANAGER]	Removed "Generate Plan" since a plan cannot be generated outside a simulation.
+1.2
+	Initial release

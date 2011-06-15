@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="bwapi-bridge" default="clean-build">
+    <property file="../Build/build.properties" />
+    
+    <target name="clean-build">
+        <antcall target="clean" />
+        <antcall target="build" />
+        <antcall target="clean" />
+    </target>
+    
+    <target name="clean">
+        <!-- clean swig-utils -->
+        <ant antfile="../swig-utils/build.xml" target="clean" inheritall="false" />
+        <!-- clean me -->
+        <delete dir="build" />
+    </target>
+    
+    <target name="build">
+        <!-- build swig-utils -->
+        <ant antfile="../swig-utils/build.xml" target="build" inheritall="false" />
+        <!-- create paths -->
+        <mkdir dir="build" />
+        <mkdir dir="build/classes" />
+        <!-- javac -->
+        <javac srcdir="src" destdir="build/classes" debug="on">
+            <classpath>
+                <fileset dir="${dist.path}" includes="**/*" />
+            </classpath>
+        </javac>
+        <copy todir="build/classes">
+            <fileset dir="src" excludes="**/*.java" />
+        </copy>
+        <!-- let's add the swig-utils source inside of here -->
+        <copy todir="build/classes">
+            <fileset dir="../swig-utils/build/classes" includes="**/*.class" />
+        </copy>
+        <!-- JAR it up -->
+        <jar destfile="${dist.path}/${bwapiBridge.jar}" basedir="build/classes" includes="**/*">
+            <manifest>
+                <section name="org/bwapi/bridge">
+                    <attribute name="Extension-name" value="org.bwapi.bridge" />
+                    <attribute name="Specification-Title" value="BWAPI" />
+                    <attribute name="Specification-Version" value="${bwapiBridge.version}" />
+                    <attribute name="Specification-Vendor" value="BWAPI" />
+                    <attribute name="Implementation-Title" value="org.bwapi.bridge" />
+                    <attribute name="Implementation-Version" value="${bwapiBridge.version}" />
+                    <attribute name="Implementation-Vendor" value="Chad Retz" />
+                </section>
+            </manifest>
+        </jar>
+    </target>
+    
+    <target name="generate-swig">
+        <!-- clean -->
+        <delete dir="src/org/bwapi/bridge/swig" includes="**/*" includeemptydirs="true" />
+        <mkdir dir="src/org/bwapi/bridge/swig" />
+        <delete dir="etc/cpp/bwapi-bridge" includes="SwigBridge*" />
+        <!-- exec swig -->
+        <exec executable="${swig.path}/swig.exe">
+            <arg line="-c++" />
+            <arg line="-java" />
+            <arg line="-outdir src/org/bwapi/bridge/swig" />
+            <arg line="-o etc/cpp/bwapi-bridge/SwigBridge.cpp" />
+            <arg line="-package org.bwapi.bridge.swig" />
+            <arg line="-I&quot;C:\Program Files\Microsoft Visual Studio 9.0\VC\include&quot;" />
+            <arg line="-Ietc/cpp/include" />
+            <arg line="etc/bwapi-bridge.i" />
+        </exec>
+        <!-- replace the path to the .h -->
+        <replace file="etc/cpp/bwapi-bridge/SwigBridge.cpp" token="etc/cpp/bwapi-bridge/" />
+        <!-- gotta qualify some BWTA goodies -->
+        <replace file="etc/cpp/bwapi-bridge/SwigBridge.cpp" token=" BaseLocation" value=" BWTA::BaseLocation" />
+        <replace file="etc/cpp/bwapi-bridge/SwigBridge.cpp" token="(BaseLocation" value="(BWTA::BaseLocation" />
+        <replace file="etc/cpp/bwapi-bridge/SwigBridge.cpp" token=" Chokepoint" value=" BWTA::Chokepoint" />
+        <replace file="etc/cpp/bwapi-bridge/SwigBridge.cpp" token="(Chokepoint" value="(BWTA::Chokepoint" />
+        <replace file="etc/cpp/bwapi-bridge/SwigBridge.cpp" token=" Polygon" value=" BWTA::Polygon" />
+        <replace file="etc/cpp/bwapi-bridge/SwigBridge.cpp" token="(Polygon" value="(BWTA::Polygon" />
+        <replace file="etc/cpp/bwapi-bridge/SwigBridge.cpp" token=" Region" value=" BWTA::Region" />
+        <replace file="etc/cpp/bwapi-bridge/SwigBridge.cpp" token="(Region" value="(BWTA::Region" />
+        <!-- build swig-utils -->
+        <ant antfile="../swig-utils/build.xml" target="build" inheritall="false" />
+        <!-- build the jar in prep to register natives -->
+        <mkdir dir="build/tempclasses" />
+        <javac srcdir="src" destdir="build/tempclasses">
+            <include name="org/bwapi/bridge/swig/*.java" />
+        </javac>
+        <!-- register natives taskdef -->
+        <taskdef name="registerNatives" classname="org.cretz.swig.ant.RegisterNativesTask">
+            <classpath>
+                <fileset dir="../lib" includes="**/*" />
+            </classpath>
+            <classpath location="build/tempclasses" />
+            <classpath location="../swig-utils/build/swig-utils.jar" />
+        </taskdef>
+        <!-- register natives -->
+        <registerNatives source="etc/cpp/bwapi-bridge/SwigBridge.cpp" module="bridge" package="org.bwapi.bridge.swig" />
+        <!-- remove temp classes -->
+        <delete dir="build/tempclasses" includeemptydirs="true" />
+    </target>
+    
+    <target name="javadoc">
+        <delete dir="etc/docs/api" includes="**/*" includeemptydirs="true" />
+        <mkdir dir="etc/docs" />
+        <mkdir dir="etc/docs/api" />
+        <javadoc destdir="etc/docs/api" author="true" version="true" use="true" windowtitle="BWAPI Bridge">
+            <packageset dir="src" defaultexcludes="yes">
+                <include name="**/*" />
+                <exclude name="org/bwapi/bridge/swig/**" />
+                <exclude name="org/bwapi/bridge/model/BridgeDelegator.java" />
+                <exclude name="org/bwapi/bridge/model/BwapiPointable.java" />
+            </packageset>
+            <packageset dir="../bwapi-unit/src" defaultexcludes="yes">
+                <include name="**/*" />
+                <exclude name="org/bwapi/unit/client/**" />
+                <exclude name="org/bwapi/unit/server/**" />
+            </packageset>
+            <doctitle><![CDATA[<h1>BWAPI Bridge</h1>]]></doctitle>
+            <bottom><![CDATA[<i>BWAPI Bridge</i>]]></bottom>
+            <link href="http://java.sun.com/javase/6/docs/api/"/>
+        </javadoc>
+    </target>
+    
+    <target name="dist" depends="clean-build,javadoc">
+        <!-- also do bwapi-unit -->
+        <ant antfile="../bwapi-unit/build.xml" target="clean-build" inheritall="false" />
+        <!-- make a zip -->
+        <delete dir="build/zip/bwapi-bridge" includes="**/*" includeemptydirs="true" />
+        <mkdir dir="build/zip" />
+        <mkdir dir="build/zip/bwapi-bridge" />
+        <copy todir="build/zip/bwapi-bridge">
+            <fileset dir="build" includes="bwapi-bridge.jar" />
+            <fileset dir="../bwapi-unit/build" includes="bwapi-unit.jar" />
+            <fileset dir="etc/cpp/bwapi-bridge/Release" includes="bwapi-bridge.dll" />
+            <fileset dir="." includes="LICENSE,README" />
+        </copy>
+        <replace dir="build/zip/bwapi-bridge" includes="README" token="@@version@@" value="${version}" />
+        <mkdir dir="build/zip/bwapi-bridge/doc" />
+        <copy todir="build/zip/bwapi-bridge/doc">
+            <fileset dir="etc/docs/api" includes="**/*" />
+        </copy>
+        <mkdir dir="build/zip/bwapi-bridge/lib" />
+        <copy todir="build/zip/bwapi-bridge/lib">
+            <fileset dir="../lib" includes="*.jar" />
+        </copy>
+        <zip destfile="build/bwapi-bridge-${version}-bin.zip" basedir="build/zip" />
+        <!-- and the src -->
+        <delete dir="build/src-zip/bwapi-bridge-src" includes="**/*" includeemptydirs="true" />
+        <mkdir dir="build/src-zip" />
+        <mkdir dir="build/src-zip/bwapi-bridge-src" />
+        <copy todir="build/src-zip/bwapi-bridge-src">
+            <fileset dir="." includes="LICENSE,README" />
+        </copy>
+        <replace dir="build/src-zip/bwapi-bridge-src" includes="README" token="@@version@@" value="${version}" />
+        <copy todir="build/src-zip/bwapi-bridge-src/bwapi-bridge">
+            <fileset dir=".">
+                <include name=".project" />
+                <include name=".classpath" />
+                <include name="src/**" />
+                <include name="etc/cpp/**" />
+                <include name="etc/bwapi-bridge.i" />
+                <exclude name="etc/cpp/bwapi-bridge/Debug/**" />
+                <exclude name="etc/cpp/bwapi-bridge/Release/**" />
+                <exclude name="etc/cpp/bwapi-bridge/*.ncb" />
+                <exclude name="etc/cpp/bwapi-bridge/*.user" />
+                <include name="build.properties" />
+                <include name="build.xml" />
+            </fileset>
+        </copy>
+        <copy todir="build/src-zip/bwapi-bridge-src/lib">
+            <fileset dir="../lib" includes="**/*" />
+        </copy>
+        <copy todir="build/src-zip/bwapi-bridge-src/bwapi-unit">
+            <fileset dir="../bwapi-unit">
+                <include name=".project" />
+                <include name=".classpath" />
+                <include name="src/**" />
+                <include name="test/**" />
+                <include name="build.properties" />
+                <include name="build.xml" />
+            </fileset>
+        </copy>
+        <copy todir="build/src-zip/bwapi-bridge-src/swig-utils">
+            <fileset dir="../swig-utils">
+                <include name=".project" />
+                <include name=".classpath" />
+                <include name="src/**" />
+                <include name="test/**" />
+                <include name="etc/cpp/**" />
+                <exclude name="etc/cpp/SwigUtils/Debug/**" />
+                <exclude name="etc/cpp/SwigUtils/Release/**" />
+                <exclude name="etc/cpp/SwigUtils/*.ncb" />
+                <exclude name="etc/cpp/SwigUtils/*.user" />
+                <include name="build.properties" />
+                <include name="build.xml" />
+            </fileset>
+        </copy>
+        <zip destfile="build/bwapi-bridge-${version}-src.zip" basedir="build/src-zip" />
+    </target>
+</project>

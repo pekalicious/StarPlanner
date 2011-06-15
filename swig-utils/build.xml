@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="swig-utils" default="clean-build">
+    <property file="../Build/build.properties" />
+    
+    <target name="clean-build">
+        <antcall target="clean" />
+        <antcall target="build" />
+        <antcall target="clean" />
+    </target>
+    
+    <target name="clean">
+        <delete dir="build" />
+    </target>
+    
+    <target name="build">
+        <!-- create paths -->
+        <mkdir dir="build" />
+        <mkdir dir="build/classes" />
+        <!-- javac -->
+        <javac srcdir="src" destdir="build/classes" debug="on">
+            <classpath>
+                <fileset dir="${dist.path}" includes="**/*" />
+            </classpath>
+        </javac>
+        <copy todir="build/classes">
+            <fileset dir="src" excludes="**/*.java" />
+        </copy>
+        <!-- JAR it up -->
+        <jar destfile="${dist.path}/${swig.jar}" basedir="build/classes" includes="**/*">
+            <manifest>
+                <section name="org/cretz/swig">
+                    <attribute name="Extension-name" value="org.cretz.swig" />
+                    <attribute name="Specification-Title" value="SWIG Utils" />
+                    <attribute name="Specification-Version" value="${swig.version}" />
+                    <attribute name="Specification-Vendor" value="Chad Retz" />
+                    <attribute name="Implementation-Title" value="org.cretz.swig" />
+                    <attribute name="Implementation-Version" value="${swig.version}" />
+                    <attribute name="Implementation-Vendor" value="Chad Retz" />
+                </section>
+            </manifest>
+        </jar>
+    </target>
+    
+    <target name="test">
+        <mkdir dir="etc/test" />
+        <delete dir="etc/test" includes="*.txt" />
+        <junit fork="true" printsummary="yes" haltonfailure="yes">
+            <jvmarg value="-Djava.library.path=${basedir}\etc\cpp\SwigUtils\Release" />
+            <formatter type="plain" />
+            <classpath>
+                <pathelement location="bin" />
+                <fileset dir="../lib" includes="**/*" />
+            </classpath>
+            <batchtest todir="etc/test">
+                <fileset dir="test" includes="**/*Test.java" />
+            </batchtest>
+        </junit>
+    </target>
+    
+    <target name="generate-swig">
+        <!-- clean -->
+        <delete dir="test/org/cretz/swig/gen" includes="**/*" />
+        <delete dir="etc/cpp/SwigUtils" includes="SwigGen*" />
+        <!-- exec swig -->
+        <exec executable="${swig.path}/swig.exe">
+            <arg line="-v" />
+            <arg line="-c++" />
+            <arg line="-java" />
+            <arg line="-outdir test/org/cretz/swig/gen" />
+            <arg line="-o etc/cpp/SwigUtils/SwigBridge.cpp" />
+            <arg line="-package org.cretz.swig.gen" />
+            <arg line="-I&quot;C:\Program Files\Microsoft Visual Studio 9.0\VC\include&quot;" />
+            <arg line="test/test.i" />
+        </exec>
+        <!-- replace the path to the .h -->
+        <replace file="etc/cpp/SwigUtils/SwigBridge.cpp" token="etc/cpp/SwigUtils/" />        
+    </target>
+</project>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="bwapi-unit" default="clean-build">
+    <property file="../Build/build.properties" />
+    
+    <target name="clean-build">
+        <antcall target="clean" />
+        <antcall target="build" />
+        <antcall target="clean" />
+    </target>
+    
+    <target name="clean">
+        <!-- clean bwapi-bridge -->
+        <ant antfile="../bwapi-bridge/build.xml" target="clean" inheritall="false" />
+        <!-- clean me -->
+        <delete dir="build" />
+    </target>
+    
+    <target name="build">
+        <!-- build bridge -->
+        <ant antfile="../bwapi-bridge/build.xml" target="build" inheritall="false" />
+        <!-- create paths -->
+        <mkdir dir="build" />
+        <mkdir dir="build/classes" />
+        <!-- javac -->
+        <javac srcdir="src" destdir="build/classes" debug="on">
+            <classpath>
+                <fileset dir="${dist.path}" includes="**/*" />
+            </classpath>
+        </javac>
+        <copy todir="build/classes">
+            <fileset dir="src" excludes="**/*.java" />
+        </copy>
+        <!-- JAR it up -->
+        <jar destfile="${dist.path}/${bwapiUnit.jar}" basedir="build/classes" includes="**/*">
+            <manifest>
+                <section name="org/bwapi/unit">
+                    <attribute name="Extension-name" value="org.bwapi.unit" />
+                    <attribute name="Specification-Title" value="BWAPI Unit" />
+                    <attribute name="Specification-Version" value="${bwapiUnit.version}" />
+                    <attribute name="Specification-Vendor" value="Chad Retz" />
+                    <attribute name="Implementation-Title" value="org.bwapi.unit" />
+                    <attribute name="Implementation-Version" value="${bwapiUnit.version}" />
+                    <attribute name="Implementation-Vendor" value="Chad Retz" />
+                </section>
+            </manifest>
+        </jar>
+    </target>
+    
+    <target name="test" depends="clean">
+        <!-- build bridge -->
+        <ant antfile="../bwapi-bridge/build.xml" target="build" inheritall="false" />
+        <!-- create paths -->
+        <mkdir dir="build" />
+        <mkdir dir="build/testClasses" />
+        <!-- javac -->
+        <javac destdir="build/testClasses" debug="on">
+            <src path="src" />
+            <src path="test" />
+            <classpath>
+                <fileset dir="../lib" includes="**/*" />
+                <fileset dir="../bwapi-bridge/build" includes="bwapi-bridge.jar" />
+            </classpath>
+        </javac>
+        <copy todir="build/testClasses">
+            <fileset dir="src" excludes="**/*.java" />
+        </copy>
+        <!-- JAR it up -->
+        <jar destfile="build/bwapi-unit-test.jar" basedir="build/testClasses" includes="**/*" />
+        <!-- Move stuff over to bwapi-data -->
+        <delete dir="${starcraft.dir}/bwapi-data/AI" includes="**/*" includeemptydirs="true" />
+        <copy todir="${starcraft.dir}/bwapi-data/AI">
+            <fileset dir="../bwapi-bridge/build" includes="bwapi-bridge.jar" />
+            <fileset dir="../bwapi-bridge/etc/cpp/bwapi-bridge/Release" includes="bwapi-bridge.dll" />
+            <fileset dir="build" includes="bwapi-unit-test.jar" />
+            <fileset dir="../lib" includes="*.jar" />
+            <fileset dir="../bwapi-bridge/build" includes="bwapi-bridge.jar" />
+        </copy>
+    </target>
+</project>

@@ -1,0 +1,408 @@
+19:19.34 :Constructing winservice object aTEST
+19:19.34 :Installation of aTEST
+19:19.35 :Service installed!
+19:19.46 :Constructing winservice object aTEST
+19:19.46 :setting up a connection with the control dispatcher (aTEST)
+19:19.46 :in service main... (1 args)
+19:19.46 :argument 0: aTEST
+19:19.46 :set status 2 (SERVICE_START_PENDING)
+19:19.46 :set status 2 (SERVICE_START_PENDING)
+19:19.46 :set status 4 (SERVICE_RUNNING)
+19:19.46 :set status 2 (SERVICE_START_PENDING)
+19:19.46 :Run...
+19:19.46 :set status 4 (SERVICE_RUNNING)
+19:19.46 :JVM found and instanciated successfully (<C:\Program Files\Java\jre1.6.0_01><C:\Program Files\Java\jre1.6.0_01\bin\client\jvm.dll><1.6.0>)
+19:19.46 :set status 4 (SERVICE_RUNNING)
+19:19.47 :set status 1 (SERVICE_STOPPED)
+19:19.47 :set status 1 (SERVICE_STOPPED)
+19:19.47 :Calling java.lang.System.exit(0)...
+19:20.35 :Constructing winservice object aTEST
+19:20.35 :Constructing winservice object aTEST
+19:20.35 :setting up a connection with the control dispatcher (aTEST)
+19:20.35 :in service main... (1 args)
+19:20.35 :argument 0: aTEST
+19:20.35 :set status 2 (SERVICE_START_PENDING)
+19:20.35 :set status 2 (SERVICE_START_PENDING)
+19:20.35 :set status 4 (SERVICE_RUNNING)
+19:20.35 :set status 2 (SERVICE_START_PENDING)
+19:20.35 :Run...
+19:20.35 :set status 4 (SERVICE_RUNNING)
+19:20.35 :JVM found and instanciated successfully (<C:\Program Files\Java\jre1.6.0_01><C:\Program Files\Java\jre1.6.0_01\bin\client\jvm.dll><1.6.0>)
+19:20.35 :set status 4 (SERVICE_RUNNING)
+19:20.35 :set status 1 (SERVICE_STOPPED)
+19:20.35 :Calling java.lang.System.exit(0)...
+19:20.35 :set status 1 (SERVICE_STOPPED)
+19:20.42 :Constructing winservice object aTEST
+19:20.42 :Constructing winservice object aTEST
+19:20.42 :setting up a connection with the control dispatcher (aTEST)
+19:20.42 :in service main... (1 args)
+19:20.42 :argument 0: aTEST
+19:20.42 :set status 2 (SERVICE_START_PENDING)
+19:20.42 :set status 2 (SERVICE_START_PENDING)
+19:20.42 :set status 4 (SERVICE_RUNNING)
+19:20.42 :set status 2 (SERVICE_START_PENDING)
+19:20.42 :Run...
+19:20.42 :set status 4 (SERVICE_RUNNING)
+19:20.42 :JVM found and instanciated successfully (<C:\Program Files\Java\jre1.6.0_01><C:\Program Files\Java\jre1.6.0_01\bin\client\jvm.dll><1.6.0>)
+19:20.42 :set status 4 (SERVICE_RUNNING)
+19:20.42 :set status 1 (SERVICE_STOPPED)
+19:20.42 :set status 1 (SERVICE_STOPPED)
+19:20.42 :Calling java.lang.System.exit(0)...
+19:20.43 :Constructing winservice object aTEST
+19:20.43 :Constructing winservice object aTEST
+19:20.43 :setting up a connection with the control dispatcher (aTEST)
+19:20.43 :in service main... (1 args)
+19:20.43 :argument 0: aTEST
+19:20.43 :set status 2 (SERVICE_START_PENDING)
+19:20.43 :set status 2 (SERVICE_START_PENDING)
+19:20.43 :set status 4 (SERVICE_RUNNING)
+19:20.43 :set status 2 (SERVICE_START_PENDING)
+19:20.43 :Run...
+19:20.43 :set status 4 (SERVICE_RUNNING)
+19:20.43 :JVM found and instanciated successfully (<C:\Program Files\Java\jre1.6.0_01><C:\Program Files\Java\jre1.6.0_01\bin\client\jvm.dll><1.6.0>)
+19:20.43 :set status 4 (SERVICE_RUNNING)
+19:20.44 :set status 1 (SERVICE_STOPPED)
+19:20.44 :set status 1 (SERVICE_STOPPED)
+19:20.44 :Calling java.lang.System.exit(0)...
+19:20.48 :Constructing winservice object aTEST
+19:20.48 :Constructing winservice object aTEST
+19:20.48 :setting up a connection with the control dispatcher (aTEST)
+19:20.48 :in service main... (1 args)
+19:20.48 :argument 0: aTEST
+19:20.48 :set status 2 (SERVICE_START_PENDING)
+19:20.48 :set status 2 (SERVICE_START_PENDING)
+19:20.48 :set status 4 (SERVICE_RUNNING)
+19:20.48 :set status 2 (SERVICE_START_PENDING)
+19:20.48 :Run...
+19:20.48 :set status 4 (SERVICE_RUNNING)
+19:20.48 :JVM found and instanciated successfully (<C:\Program Files\Java\jre1.6.0_01><C:\Program Files\Java\jre1.6.0_01\bin\client\jvm.dll><1.6.0>)
+19:20.48 :set status 4 (SERVICE_RUNNING)
+19:20.49 :set status 1 (SERVICE_STOPPED)
+19:20.49 :set status 1 (SERVICE_STOPPED)
+19:20.49 :Calling java.lang.System.exit(0)...
+19:20.50 :Constructing winservice object aTEST
+19:20.50 :Constructing winservice object aTEST
+19:20.50 :setting up a connection with the control dispatcher (aTEST)
+19:20.50 :in service main... (1 args)
+19:20.50 :argument 0: aTEST
+19:20.50 :set status 2 (SERVICE_START_PENDING)
+19:20.50 :set status 2 (SERVICE_START_PENDING)
+19:20.50 :set status 4 (SERVICE_RUNNING)
+19:20.50 :set status 2 (SERVICE_START_PENDING)
+19:20.50 :Run...
+19:20.50 :set status 4 (SERVICE_RUNNING)
+19:20.50 :JVM found and instanciated successfully (<C:\Program Files\Java\jre1.6.0_01><C:\Program Files\Java\jre1.6.0_01\bin\client\jvm.dll><1.6.0>)
+19:20.50 :set status 4 (SERVICE_RUNNING)
+19:20.50 :set status 1 (SERVICE_STOPPED)
+19:20.50 :set status 1 (SERVICE_STOPPED)
+19:20.50 :Calling java.lang.System.exit(0)...
+19:20.51 :Constructing winservice object aTEST
+19:20.51 :Constructing winservice object aTEST
+19:20.51 :setting up a connection with the control dispatcher (aTEST)
+19:20.51 :in service main... (1 args)
+19:20.51 :argument 0: aTEST
+19:20.51 :set status 2 (SERVICE_START_PENDING)
+19:20.51 :set status 2 (SERVICE_START_PENDING)
+19:20.51 :set status 4 (SERVICE_RUNNING)
+19:20.51 :set status 2 (SERVICE_START_PENDING)
+19:20.51 :Run...
+19:20.51 :set status 4 (SERVICE_RUNNING)
+19:20.51 :JVM found and instanciated successfully (<C:\Program Files\Java\jre1.6.0_01><C:\Program Files\Java\jre1.6.0_01\bin\client\jvm.dll><1.6.0>)
+19:20.51 :set status 4 (SERVICE_RUNNING)
+19:20.51 :set status 1 (SERVICE_STOPPED)
+19:20.51 :set status 1 (SERVICE_STOPPED)
+19:20.51 :Calling java.lang.System.exit(0)...
+19:20.52 :Constructing winservice object aTEST
+19:20.52 :Constructing winservice object aTEST
+19:20.52 :setting up a connection with the control dispatcher (aTEST)
+19:20.52 :in service main... (1 args)
+19:20.52 :argument 0: aTEST
+19:20.52 :set status 2 (SERVICE_START_PENDING)
+19:20.52 :set status 2 (SERVICE_START_PENDING)
+19:20.52 :set status 4 (SERVICE_RUNNING)
+19:20.52 :set status 2 (SERVICE_START_PENDING)
+19:20.52 :Run...
+19:20.52 :set status 4 (SERVICE_RUNNING)
+19:20.52 :JVM found and instanciated successfully (<C:\Program Files\Java\jre1.6.0_01><C:\Program Files\Java\jre1.6.0_01\bin\client\jvm.dll><1.6.0>)
+19:20.52 :set status 4 (SERVICE_RUNNING)
+19:20.52 :set status 1 (SERVICE_STOPPED)
+19:20.52 :set status 1 (SERVICE_STOPPED)
+19:20.52 :Calling java.lang.System.exit(0)...
+19:20.54 :Constructing winservice object aTEST
+19:20.54 :Constructing winservice object aTEST
+19:20.54 :setting up a connection with the control dispatcher (aTEST)
+19:20.54 :in service main... (1 args)
+19:20.54 :argument 0: aTEST
+19:20.54 :set status 2 (SERVICE_START_PENDING)
+19:20.54 :set status 2 (SERVICE_START_PENDING)
+19:20.54 :set status 4 (SERVICE_RUNNING)
+19:20.54 :set status 2 (SERVICE_START_PENDING)
+19:20.54 :Run...
+19:20.54 :set status 4 (SERVICE_RUNNING)
+19:20.54 :JVM found and instanciated successfully (<C:\Program Files\Java\jre1.6.0_01><C:\Program Files\Java\jre1.6.0_01\bin\client\jvm.dll><1.6.0>)
+19:20.54 :set status 4 (SERVICE_RUNNING)
+19:20.54 :set status 1 (SERVICE_STOPPED)
+19:20.54 :set status 1 (SERVICE_STOPPED)
+19:20.54 :Calling java.lang.System.exit(0)...
+19:20.55 :Constructing winservice object aTEST
+19:20.55 :Constructing winservice object aTEST
+19:20.55 :setting up a connection with the control dispatcher (aTEST)
+19:20.55 :in service main... (1 args)
+19:20.55 :argument 0: aTEST
+19:20.55 :set status 2 (SERVICE_START_PENDING)
+19:20.55 :set status 2 (SERVICE_START_PENDING)
+19:20.55 :set status 4 (SERVICE_RUNNING)
+19:20.55 :set status 2 (SERVICE_START_PENDING)
+19:20.55 :Run...
+19:20.55 :set status 4 (SERVICE_RUNNING)
+19:20.55 :JVM found and instanciated successfully (<C:\Program Files\Java\jre1.6.0_01><C:\Program Files\Java\jre1.6.0_01\bin\client\jvm.dll><1.6.0>)
+19:20.55 :set status 4 (SERVICE_RUNNING)
+19:20.55 :set status 1 (SERVICE_STOPPED)
+19:20.55 :set status 1 (SERVICE_STOPPED)
+19:20.55 :Calling java.lang.System.exit(0)...
+19:20.55 :Constructing winservice object aTEST
+19:20.55 :Constructing winservice object aTEST
+19:20.55 :setting up a connection with the control dispatcher (aTEST)
+19:20.55 :in service main... (1 args)
+19:20.55 :argument 0: aTEST
+19:20.55 :set status 2 (SERVICE_START_PENDING)
+19:20.55 :set status 2 (SERVICE_START_PENDING)
+19:20.55 :set status 4 (SERVICE_RUNNING)
+19:20.55 :set status 2 (SERVICE_START_PENDING)
+19:20.55 :Run...
+19:20.55 :set status 4 (SERVICE_RUNNING)
+19:20.56 :JVM found and instanciated successfully (<C:\Program Files\Java\jre1.6.0_01><C:\Program Files\Java\jre1.6.0_01\bin\client\jvm.dll><1.6.0>)
+19:20.56 :set status 4 (SERVICE_RUNNING)
+19:20.56 :set status 1 (SERVICE_STOPPED)
+19:20.56 :set status 1 (SERVICE_STOPPED)
+19:20.56 :Calling java.lang.System.exit(0)...
+19:20.56 :Constructing winservice object aTEST
+19:20.56 :Constructing winservice object aTEST
+19:20.56 :setting up a connection with the control dispatcher (aTEST)
+19:20.56 :in service main... (1 args)
+19:20.56 :argument 0: aTEST
+19:20.56 :set status 2 (SERVICE_START_PENDING)
+19:20.56 :set status 2 (SERVICE_START_PENDING)
+19:20.56 :set status 4 (SERVICE_RUNNING)
+19:20.56 :set status 2 (SERVICE_START_PENDING)
+19:20.56 :Run...
+19:20.56 :set status 4 (SERVICE_RUNNING)
+19:20.57 :JVM found and instanciated successfully (<C:\Program Files\Java\jre1.6.0_01><C:\Program Files\Java\jre1.6.0_01\bin\client\jvm.dll><1.6.0>)
+19:20.57 :set status 4 (SERVICE_RUNNING)
+19:20.57 :set status 1 (SERVICE_STOPPED)
+19:20.57 :set status 1 (SERVICE_STOPPED)
+19:20.57 :Calling java.lang.System.exit(0)...
+19:20.57 :Constructing winservice object aTEST
+19:20.57 :Constructing winservice object aTEST
+19:20.57 :setting up a connection with the control dispatcher (aTEST)
+19:20.57 :in service main... (1 args)
+19:20.57 :argument 0: aTEST
+19:20.57 :set status 2 (SERVICE_START_PENDING)
+19:20.57 :set status 2 (SERVICE_START_PENDING)
+19:20.57 :set status 4 (SERVICE_RUNNING)
+19:20.57 :set status 2 (SERVICE_START_PENDING)
+19:20.57 :Run...
+19:20.57 :set status 4 (SERVICE_RUNNING)
+19:20.57 :JVM found and instanciated successfully (<C:\Program Files\Java\jre1.6.0_01><C:\Program Files\Java\jre1.6.0_01\bin\client\jvm.dll><1.6.0>)
+19:20.57 :set status 4 (SERVICE_RUNNING)
+19:20.58 :set status 1 (SERVICE_STOPPED)
+19:20.58 :set status 1 (SERVICE_STOPPED)
+19:20.58 :Calling java.lang.System.exit(0)...
+19:20.58 :Constructing winservice object aTEST
+19:20.58 :Constructing winservice object aTEST
+19:20.58 :setting up a connection with the control dispatcher (aTEST)
+19:20.58 :in service main... (1 args)
+19:20.58 :argument 0: aTEST
+19:20.58 :set status 2 (SERVICE_START_PENDING)
+19:20.58 :set status 2 (SERVICE_START_PENDING)
+19:20.58 :set status 4 (SERVICE_RUNNING)
+19:20.58 :set status 2 (SERVICE_START_PENDING)
+19:20.58 :Run...
+19:20.58 :set status 4 (SERVICE_RUNNING)
+19:20.58 :JVM found and instanciated successfully (<C:\Program Files\Java\jre1.6.0_01><C:\Program Files\Java\jre1.6.0_01\bin\client\jvm.dll><1.6.0>)
+19:20.58 :set status 4 (SERVICE_RUNNING)
+19:20.58 :set status 1 (SERVICE_STOPPED)
+19:20.58 :Calling java.lang.System.exit(0)...
+19:20.58 :set status 1 (SERVICE_STOPPED)
+19:21.00 :Constructing winservice object aTEST
+19:21.00 :Constructing winservice object aTEST
+19:21.00 :setting up a connection with the control dispatcher (aTEST)
+19:21.00 :in service main... (1 args)
+19:21.00 :argument 0: aTEST
+19:21.00 :set status 2 (SERVICE_START_PENDING)
+19:21.00 :set status 2 (SERVICE_START_PENDING)
+19:21.00 :set status 4 (SERVICE_RUNNING)
+19:21.00 :set status 2 (SERVICE_START_PENDING)
+19:21.00 :Run...
+19:21.00 :set status 4 (SERVICE_RUNNING)
+19:21.00 :JVM found and instanciated successfully (<C:\Program Files\Java\jre1.6.0_01><C:\Program Files\Java\jre1.6.0_01\bin\client\jvm.dll><1.6.0>)
+19:21.00 :set status 4 (SERVICE_RUNNING)
+19:21.00 :set status 1 (SERVICE_STOPPED)
+19:21.00 :set status 1 (SERVICE_STOPPED)
+19:21.00 :Calling java.lang.System.exit(0)...
+19:21.01 :Constructing winservice object aTEST
+19:21.01 :Constructing winservice object aTEST
+19:21.01 :setting up a connection with the control dispatcher (aTEST)
+19:21.01 :in service main... (1 args)
+19:21.01 :argument 0: aTEST
+19:21.01 :set status 2 (SERVICE_START_PENDING)
+19:21.01 :set status 2 (SERVICE_START_PENDING)
+19:21.01 :set status 4 (SERVICE_RUNNING)
+19:21.01 :set status 2 (SERVICE_START_PENDING)
+19:21.01 :Run...
+19:21.01 :set status 4 (SERVICE_RUNNING)
+19:21.01 :JVM found and instanciated successfully (<C:\Program Files\Java\jre1.6.0_01><C:\Program Files\Java\jre1.6.0_01\bin\client\jvm.dll><1.6.0>)
+19:21.01 :set status 4 (SERVICE_RUNNING)
+19:21.01 :set status 1 (SERVICE_STOPPED)
+19:21.01 :set status 1 (SERVICE_STOPPED)
+19:21.01 :Calling java.lang.System.exit(0)...
+19:21.03 :Constructing winservice object aTEST
+19:21.04 :Constructing winservice object aTEST
+19:21.06 :Constructing winservice object aTEST
+19:21.06 :Constructing winservice object aTEST
+19:21.06 :setting up a connection with the control dispatcher (aTEST)
+19:21.06 :in service main... (1 args)
+19:21.06 :argument 0: aTEST
+19:21.06 :set status 2 (SERVICE_START_PENDING)
+19:21.06 :set status 2 (SERVICE_START_PENDING)
+19:21.06 :set status 4 (SERVICE_RUNNING)
+19:21.06 :set status 2 (SERVICE_START_PENDING)
+19:21.06 :Run...
+19:21.06 :set status 4 (SERVICE_RUNNING)
+19:21.06 :JVM found and instanciated successfully (<C:\Program Files\Java\jre1.6.0_01><C:\Program Files\Java\jre1.6.0_01\bin\client\jvm.dll><1.6.0>)
+19:21.06 :set status 4 (SERVICE_RUNNING)
+19:21.06 :set status 1 (SERVICE_STOPPED)
+19:21.06 :set status 1 (SERVICE_STOPPED)
+19:21.06 :Calling java.lang.System.exit(0)...
+19:22.33 :Constructing winservice object aTEST
+19:22.33 :Constructing winservice object aTEST
+19:22.33 :setting up a connection with the control dispatcher (aTEST)
+19:22.33 :in service main... (1 args)
+19:22.33 :argument 0: aTEST
+19:22.33 :set status 2 (SERVICE_START_PENDING)
+19:22.33 :set status 2 (SERVICE_START_PENDING)
+19:22.33 :set status 4 (SERVICE_RUNNING)
+19:22.33 :set status 2 (SERVICE_START_PENDING)
+19:22.33 :Run...
+19:22.33 :set status 4 (SERVICE_RUNNING)
+19:22.33 :JVM found and instanciated successfully (<C:\Program Files\Java\jre1.6.0_01><C:\Program Files\Java\jre1.6.0_01\bin\client\jvm.dll><1.6.0>)
+19:22.33 :set status 4 (SERVICE_RUNNING)
+19:22.33 :set status 1 (SERVICE_STOPPED)
+19:22.33 :set status 1 (SERVICE_STOPPED)
+19:22.33 :Calling java.lang.System.exit(0)...
+19:22.57 :Constructing winservice object aTEST
+19:22.57 :Constructing winservice object aTEST
+19:22.57 :setting up a connection with the control dispatcher (aTEST)
+19:22.57 :in service main... (1 args)
+19:22.57 :argument 0: aTEST
+19:22.57 :set status 2 (SERVICE_START_PENDING)
+19:22.57 :set status 2 (SERVICE_START_PENDING)
+19:22.57 :set status 4 (SERVICE_RUNNING)
+19:22.57 :set status 2 (SERVICE_START_PENDING)
+19:22.57 :Run...
+19:22.57 :set status 4 (SERVICE_RUNNING)
+19:22.57 :JVM found and instanciated successfully (<C:\Program Files\Java\jre1.6.0_01><C:\Program Files\Java\jre1.6.0_01\bin\client\jvm.dll><1.6.0>)
+19:22.57 :set status 4 (SERVICE_RUNNING)
+19:23.57 :set status 1 (SERVICE_STOPPED)
+19:23.57 :Calling java.lang.System.exit(0)...
+19:23.57 :set status 1 (SERVICE_STOPPED)
+19:31.45 :Constructing winservice object aTEST
+19:31.45 :Constructing winservice object aTEST
+19:31.45 :setting up a connection with the control dispatcher (aTEST)
+19:31.45 :in service main... (1 args)
+19:31.45 :argument 0: aTEST
+19:31.45 :set status 2 (SERVICE_START_PENDING)
+19:31.45 :set status 2 (SERVICE_START_PENDING)
+19:31.45 :set status 4 (SERVICE_RUNNING)
+19:31.45 :set status 2 (SERVICE_START_PENDING)
+19:31.45 :Run...
+19:31.45 :set status 4 (SERVICE_RUNNING)
+19:31.45 :JVM found and instanciated successfully (<C:\Program Files\Java\jre1.6.0_01><C:\Program Files\Java\jre1.6.0_01\bin\client\jvm.dll><1.6.0>)
+19:31.45 :set status 4 (SERVICE_RUNNING)
+19:31.54 :Constructing winservice object aTEST
+19:31.54 :set status 3 (SERVICE_STOP_PENDING)
+19:31.54 :Stopping the service...
+19:31.54 :set status 1 (SERVICE_STOPPED)
+19:31.54 :Calling java.lang.System.exit(0)...
+19:32.08 :Constructing winservice object aTEST
+19:32.08 :setting up a connection with the control dispatcher (aTEST)
+19:32.08 :in service main... (1 args)
+19:32.08 :argument 0: aTEST
+19:32.08 :set status 2 (SERVICE_START_PENDING)
+19:32.08 :set status 2 (SERVICE_START_PENDING)
+19:32.08 :set status 4 (SERVICE_RUNNING)
+19:32.08 :set status 2 (SERVICE_START_PENDING)
+19:32.08 :Run...
+19:32.08 :set status 4 (SERVICE_RUNNING)
+19:32.08 :JVM found and instanciated successfully (<C:\Program Files\Java\jre1.6.0_01><C:\Program Files\Java\jre1.6.0_01\bin\client\jvm.dll><1.6.0>)
+19:32.08 :set status 4 (SERVICE_RUNNING)
+19:32.13 :set status 3 (SERVICE_STOP_PENDING)
+19:32.13 :Stopping the service...
+19:32.13 :set status 1 (SERVICE_STOPPED)
+19:32.13 :Calling java.lang.System.exit(0)...
+19:32.15 :Constructing winservice object aTEST
+19:32.15 :setting up a connection with the control dispatcher (aTEST)
+19:32.15 :in service main... (1 args)
+19:32.15 :argument 0: aTEST
+19:32.15 :set status 2 (SERVICE_START_PENDING)
+19:32.15 :set status 2 (SERVICE_START_PENDING)
+19:32.15 :set status 4 (SERVICE_RUNNING)
+19:32.15 :set status 2 (SERVICE_START_PENDING)
+19:32.15 :Run...
+19:32.15 :set status 4 (SERVICE_RUNNING)
+19:32.15 :JVM found and instanciated successfully (<C:\Program Files\Java\jre1.6.0_01><C:\Program Files\Java\jre1.6.0_01\bin\client\jvm.dll><1.6.0>)
+19:32.15 :set status 4 (SERVICE_RUNNING)
+19:32.21 :set status 3 (SERVICE_STOP_PENDING)
+19:32.21 :Stopping the service...
+19:32.21 :set status 1 (SERVICE_STOPPED)
+19:32.21 :Calling java.lang.System.exit(0)...
+19:32.24 :Constructing winservice object aTEST
+19:32.24 :setting up a connection with the control dispatcher (aTEST)
+19:32.24 :in service main... (1 args)
+19:32.24 :argument 0: aTEST
+19:32.24 :set status 2 (SERVICE_START_PENDING)
+19:32.24 :set status 2 (SERVICE_START_PENDING)
+19:32.24 :set status 4 (SERVICE_RUNNING)
+19:32.24 :set status 2 (SERVICE_START_PENDING)
+19:32.24 :Run...
+19:32.24 :set status 4 (SERVICE_RUNNING)
+19:32.24 :JVM found and instanciated successfully (<C:\Program Files\Java\jre1.6.0_01><C:\Program Files\Java\jre1.6.0_01\bin\client\jvm.dll><1.6.0>)
+19:32.24 :set status 4 (SERVICE_RUNNING)
+19:32.30 :set status 3 (SERVICE_STOP_PENDING)
+19:32.30 :Stopping the service...
+19:32.30 :set status 1 (SERVICE_STOPPED)
+19:32.30 :Calling java.lang.System.exit(0)...
+19:32.32 :Constructing winservice object aTEST
+19:32.32 :setting up a connection with the control dispatcher (aTEST)
+19:32.32 :in service main... (1 args)
+19:32.32 :argument 0: aTEST
+19:32.32 :set status 2 (SERVICE_START_PENDING)
+19:32.32 :set status 2 (SERVICE_START_PENDING)
+19:32.32 :set status 4 (SERVICE_RUNNING)
+19:32.32 :set status 2 (SERVICE_START_PENDING)
+19:32.32 :Run...
+19:32.32 :set status 4 (SERVICE_RUNNING)
+19:32.32 :JVM found and instanciated successfully (<C:\Program Files\Java\jre1.6.0_01><C:\Program Files\Java\jre1.6.0_01\bin\client\jvm.dll><1.6.0>)
+19:32.32 :set status 4 (SERVICE_RUNNING)
+19:32.37 :set status 3 (SERVICE_STOP_PENDING)
+19:32.37 :Stopping the service...
+19:32.37 :set status 1 (SERVICE_STOPPED)
+19:32.37 :Calling java.lang.System.exit(0)...
+19:33.03 :Constructing winservice object aTEST
+19:33.03 :setting up a connection with the control dispatcher (aTEST)
+19:33.03 :in service main... (1 args)
+19:33.03 :argument 0: aTEST
+19:33.03 :set status 2 (SERVICE_START_PENDING)
+19:33.03 :set status 2 (SERVICE_START_PENDING)
+19:33.03 :set status 4 (SERVICE_RUNNING)
+19:33.03 :set status 2 (SERVICE_START_PENDING)
+19:33.03 :Run...
+19:33.03 :set status 4 (SERVICE_RUNNING)
+19:33.03 :JVM found and instanciated successfully (<C:\Program Files\Java\jre1.6.0_01><C:\Program Files\Java\jre1.6.0_01\bin\client\jvm.dll><1.6.0>)
+19:33.03 :set status 4 (SERVICE_RUNNING)
+19:33.06 :set status 3 (SERVICE_STOP_PENDING)
+19:33.06 :Stopping the service...
+19:33.06 :set status 1 (SERVICE_STOPPED)
+19:33.06 :Calling java.lang.System.exit(0)...
+06:15.40 :Constructing winservice object aTEST
+06:15.40 :setting up a connection with the control dispatcher (aTEST)

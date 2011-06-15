@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="jgoap" default="clean-build">
+    <property file="../Build/build.properties" />
+    
+    <target name="clean-build">
+        <antcall target="clean" />
+        <antcall target="build" />
+        <antcall target="clean" />
+    </target>
+    
+    <target name="clean">
+        <delete dir="build" />
+    </target>
+    
+    <target name="build">
+        <!-- create paths -->
+        <mkdir dir="build" />
+        <mkdir dir="build/classes" />
+        <!-- javac -->
+        <javac srcdir="src" destdir="build/classes" debug="on">
+            <classpath>
+                <fileset dir="${dist.path}" includes="**/*" />
+            </classpath>
+        </javac>
+        <copy todir="build/classes">
+            <fileset dir="src" excludes="**/*.java" />
+        </copy>
+        <!-- JAR it up -->
+        <jar destfile="${dist.path}/${jgoap.jar}" basedir="build/classes" includes="**/*">
+            <manifest>
+                <section name="com/pekalicious/jgoap">
+                    <attribute name="Extension-name" value="com.pekalicious.jgoap" />
+                    <attribute name="Specification-Title" value="JGOAP" />
+                    <attribute name="Specification-Version" value="${jgoap.version}" />
+                    <attribute name="Specification-Vendor" value="Panagiotis Peikidis" />
+                    <attribute name="Implementation-Title" value="com.pekalicious.jgoap" />
+                    <attribute name="Implementation-Version" value="${jgoap.version}" />
+                    <attribute name="Implementation-Vendor" value="Panagiotis Peikidis" />
+                </section>
+            </manifest>
+        </jar>
+    </target>
+</project>

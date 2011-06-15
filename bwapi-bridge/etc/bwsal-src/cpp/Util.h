@@ -1,0 +1,1 @@
+void log(const char* text, ...);

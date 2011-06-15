@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="starplanner" default="clean-build">
+    <property file="../Build/build.properties" />
+    
+	<taskdef name="jsmoothgen"
+	         classname="net.charabia.jsmoothgen.ant.JSmoothGen"
+	         classpath="etc/jsmooth-0.9.9-7/lib/jsmoothgen-ant.jar"/>
+	
+    <target name="clean-build">
+        <antcall target="clean" />
+        <antcall target="build" />
+    	<antcall target="jsmooth" />
+        <antcall target="clean" />
+    </target>
+    
+    <target name="clean">
+        <delete dir="build" />
+    </target>
+    
+	<target name="jsmooth">
+		<jsmoothgen project="starplanner.jsmooth" 
+		              skeletonroot="etc/jsmooth-0.9.9-7/skeletons"/>
+	</target>
+	
+    <target name="build">
+        <!-- create paths -->
+        <mkdir dir="build" />
+        <mkdir dir="build/classes" />
+        <!-- javac -->
+        <javac srcdir="src" destdir="build/classes" debug="on">
+            <classpath>
+                <fileset dir="${dist.path}" includes="**/*" />
+            </classpath>
+        </javac>
+        <copy todir="build/classes">
+            <fileset dir="src" excludes="**/*.java" />
+        </copy>
+        <copy todir="build/classes/META-INF">
+            <fileset dir="META-INF" />
+        </copy>
+        <!-- JAR it up -->
+        <jar destfile="${dist.path}/${starplanner.jar}" basedir="build/classes" includes="**/*">
+            <manifest>
+                <section name="com/pekalicious/jgoap">
+                    <attribute name="Extension-name" value="com.pekalicious.starplanner" />
+                    <attribute name="Specification-Title" value="StarPlanner" />
+                    <attribute name="Specification-Version" value="${starplanner.version}" />
+                    <attribute name="Specification-Vendor" value="Panagiotis Peikidis" />
+                    <attribute name="Implementation-Title" value="com.pekalicious.starplanner" />
+                    <attribute name="Implementation-Version" value="${starplanner.version}" />
+                    <attribute name="Implementation-Vendor" value="Panagiotis Peikidis" />
+                </section>
+            </manifest>
+        </jar>
+    </target>
+</project>
