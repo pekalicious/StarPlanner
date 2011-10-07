@@ -9,6 +9,7 @@ import com.pekalicious.goap.PlannerAction;
 import com.pekalicious.starplanner.actuators.BattleManager;
 import com.pekalicious.starplanner.actuators.BuildPlanManager;
 import com.pekalicious.starplanner.actuators.BuilderManager;
+import com.pekalicious.starplanner.managers.AddonManager;
 import com.pekalicious.starplanner.managers.GoalManager;
 import com.pekalicious.starplanner.managers.ResourceManager;
 import com.pekalicious.starplanner.managers.ScoutManager;
@@ -29,6 +30,7 @@ public class StarPlanner extends Agent {
     protected BuildPlanManager buildPlanManager;
     private BuilderManager builderManager;
     private TrainingManager trainingManager;
+    private AddonManager addonManager;
     
     // Managers
 	private ResourceManager resourceManager;
@@ -55,6 +57,7 @@ public class StarPlanner extends Agent {
 		this.builderManager = new BuilderManager(this.game, (StarBlackboard) this.blackBoard, this.resourceManager.getBaseManagers());
 		this.trainingManager = new TrainingManager(this.game, (StarBlackboard) this.blackBoard);
 		//this.scoutManager = new ScoutManager(this.game, (StarBlackboard) this.blackBoard);
+		this.addonManager = new AddonManager(this.game, (StarBlackboard) this.blackBoard);
 		this.squadManager = new SquadManager(this);
 		
 		this.battleManager = new BattleManager(this.game);
@@ -84,6 +87,7 @@ public class StarPlanner extends Agent {
 		this.resourceManager.update();
 		this.builderManager.update();
 		this.trainingManager.update();
+		this.addonManager.update();
 		//this.scoutManager.update();
 		this.battleManager.update();
 		this.enemySensor.update();

@@ -19,18 +19,18 @@ import com.pekalicious.starplanner.managers.OrderStatus;
 import com.pekalicious.starplanner.managers.TrainingOrder;
 import com.pekalicious.starplanner.util.UnitUtils;
 
-public class ActionTrainMarine extends StarAction implements Serializable {
-	private static final long serialVersionUID = -7560261995935171736L;
+public class ActionTrainTank extends StarAction implements Serializable {
+	private static final long serialVersionUID = 4345606203384075247L;
 
 	TrainingOrder order;
 	
 	@Override
 	public void setupConditions() {
 		this.preconditions = new WorldState();
-		this.preconditions.setProperty(WSKey.T_BARRACKS, new WorldStateValue<Boolean>(true));
+		this.preconditions.setProperty(WSKey.T_MACHINE_SHOP, new WorldStateValue<Boolean>(true));
 		
 		this.effects = new WorldState();
-		this.effects.setProperty(WSKey.T_MARINES, new WorldStateValue<Boolean>(true));
+		this.effects.setProperty(WSKey.T_TANKS, new WorldStateValue<Boolean>(true));
 
 		this.cost = 10.0f;
 		this.precedence = 1;
@@ -43,18 +43,18 @@ public class ActionTrainMarine extends StarAction implements Serializable {
 		if (needFacts.length > 0) {
 			for (WorkingMemoryFact fact : needFacts) {
 				StarMemoryFact starFact = (StarMemoryFact)fact;
-				if (starFact.needType.equals(UnitType.TERRAN_MARINE)) {
+				if (starFact.needType.equals(UnitType.TERRAN_SIEGE_TANK_TANK_MODE)) {
 					if (starFact.needTypeCount > 0) {
 						count = starFact.needTypeCount;
 					}else{
-						Logger.Debug("TrainMarine:\tNeed Marine without count!\n", 1);
+						Logger.Debug("TrainTank:\tNeed Tank without count!\n", 1);
 					}
 				}
 			}
 		}
 
 		StarBlackboard bb = (StarBlackboard)((StarPlanner)agent).getBlackBoard(); 
-		order = bb.addToTrainingQueue(UnitUtils.Type.TERRAN_MARINE, count);
+		order = bb.addToTrainingQueue(UnitUtils.Type.TERRAN_TANK, count);
 	}
 
 	@Override
@@ -84,7 +84,7 @@ public class ActionTrainMarine extends StarAction implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "TrainMarine";
+		return "TrainTank";
 	}
 
 	@Override
@@ -94,7 +94,7 @@ public class ActionTrainMarine extends StarAction implements Serializable {
 
 	@Override
 	public boolean canBeDisabled() {
-		return false;
+		return true;
 	}
 
 }

@@ -15,6 +15,7 @@ import com.pekalicious.goap.PlannerGoal;
 import com.pekalicious.starplanner.StarPlanner;
 import com.pekalicious.starplanner.StarPlannerData;
 import com.pekalicious.starplanner.actions.StarAction;
+import com.pekalicious.starplanner.actions.terran.ActionAddonMachineShop;
 import com.pekalicious.starplanner.actions.terran.ActionBuildAcademy;
 import com.pekalicious.starplanner.actions.terran.ActionBuildArmory;
 import com.pekalicious.starplanner.actions.terran.ActionBuildBarrack;
@@ -26,6 +27,7 @@ import com.pekalicious.starplanner.actions.terran.ActionBuildStarport;
 import com.pekalicious.starplanner.actions.terran.ActionTrainFirebat;
 import com.pekalicious.starplanner.actions.terran.ActionTrainGoliath;
 import com.pekalicious.starplanner.actions.terran.ActionTrainMarine;
+import com.pekalicious.starplanner.actions.terran.ActionTrainTank;
 import com.pekalicious.starplanner.actions.terran.StrActionAttackLocation;
 import com.pekalicious.starplanner.actions.terran.StrActionBringSquadToLocation;
 import com.pekalicious.starplanner.actions.terran.StrActionBringWorkerToLocation;
@@ -207,6 +209,8 @@ public class GoalManager {
 			new ActionBuildAcademy(),
 			new ActionBuildStarport(),
 			new ActionBuildFactory(),
+			new ActionAddonMachineShop(),
+			new ActionTrainTank()
 		};
 	}
 	

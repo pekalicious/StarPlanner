@@ -37,7 +37,7 @@ public class StrActionCreateUnits extends StarAction implements Serializable {
 				}
 			}
 		}else{
-			make.addUnitType(UnitType.TERRAN_MARINE.getName());
+			make.addUnitType(UnitType.TERRAN_SIEGE_TANK_TANK_MODE.getName());
 		}
 		
 		this.blackBoard.buildGoal = make;

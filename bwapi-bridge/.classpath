@@ -3,7 +3,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/swig-utils"/>
-	<classpathentry kind="lib" path="C:/Users/pek/workspace/eclipse/build/release/program files/starcraft/bwapi-data/AI/collections-generic-4.01.jar" sourcepath="C:/dls/lib/collections-generic-4.01/src/collections-generic-4.01/src/java"/>
-	<classpathentry kind="lib" path="C:/Users/pek/workspace/eclipse/build/release/program files/starcraft/bwapi-data/AI/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/pek/Desktop/StarPlanner/build/release/program files/starcraft/bwapi-data/AI/collections-generic-4.01.jar" sourcepath="C:/dls/lib/collections-generic-4.01/src/collections-generic-4.01/src/java"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/pek/Desktop/StarPlanner/build/release/program files/starcraft/bwapi-data/AI/log4j-1.2.15.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

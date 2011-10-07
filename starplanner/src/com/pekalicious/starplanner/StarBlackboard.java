@@ -9,6 +9,7 @@ import org.bwapi.bridge.model.UnitType;
 import com.pekalicious.Logger;
 import com.pekalicious.agent.BlackBoard;
 import com.pekalicious.goap.PlannerGoal;
+import com.pekalicious.starplanner.managers.AddonOrder;
 import com.pekalicious.starplanner.managers.BuildOrder;
 import com.pekalicious.starplanner.managers.OrderStatus;
 import com.pekalicious.starplanner.managers.TrainingOrder;
@@ -21,6 +22,7 @@ public class StarBlackboard implements BlackBoard {
 	public int buildPriority;
 	public List<TrainingOrder> trainingQueue;
 	public Unit scout;
+	public List<AddonOrder> addonQueue;
 
 	public boolean buildPlanReplan;
 	public PlannerGoal buildGoal;
@@ -43,12 +45,20 @@ public class StarBlackboard implements BlackBoard {
 	public void resetValues() {
 		buildQueue = new ArrayList<BuildOrder>();
 		trainingQueue = new ArrayList<TrainingOrder>();
+		addonQueue = new ArrayList<AddonOrder>();
 	}
 	
 	public BuildOrder addToBuildQueue(UnitUtils.Type type, int buildCount) {
 		BuildOrder order = new BuildOrder(type, buildCount);
 		this.buildQueue.add(order);
 		Logger.Debug("Blackboard:\tAdded to buildQueue: " + buildCount + " " + type.bwapiType.getName() + "\n", 2);
+		return order;
+	}
+	
+	public AddonOrder addToAddonQueue(UnitUtils.Type type) {
+		AddonOrder order = new AddonOrder(type);
+		this.addonQueue.add(order);
+		Logger.Debug("Blackboard:\tAdded to addonQueue: " + type.bwapiType.getName() + "\n", 2);
 		return order;
 	}
 	

@@ -3,3 +3,15 @@
 /bwapi-bridge/etc/cpp/bwapi-bridge/Debug/
 /bwapi-bridge/etc/cpp/bwapi-bridge/Release/
 /starplanner/etc/jsmooth-0.9.9-7/docs/
+/.metadata/
+/bwapi-bridge/bin/
+/bwapi-unit/bin/
+/jgoap/bin/
+/swig-utils/bin/
+/starplanner/bin/
+/build/release/program files/starcraft/bwapi-data/AI/JGoap.jar
+/build/release/program files/starcraft/bwapi-data/AI/StarPlanner.exe
+/build/release/program files/starcraft/bwapi-data/AI/StarPlanner.jar
+/build/release/program files/starcraft/bwapi-data/AI/bwapi-bridge.jar
+/build/release/program files/starcraft/bwapi-data/AI/bwapi-unit.jar
+/build/release/program files/starcraft/bwapi-data/AI/swig-utils.jar

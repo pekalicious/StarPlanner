@@ -140,6 +140,7 @@ public class BaseManager {
 		
 		if (this.base == null) return;
 		if (isFull()) return;
+		Logger.Debug("BaseMngr:\tBase not full\n", 5);
 		
 		if (this.workers.size() >= this.maxRefineryWorkers && needRefinery()) {
 			if (this.refineryOrder == null) {

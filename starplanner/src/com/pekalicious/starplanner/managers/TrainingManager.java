@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.bwapi.bridge.model.Game;
 import org.bwapi.bridge.model.Unit;
-import org.bwapi.bridge.model.UnitType;
 
 import com.pekalicious.Logger;
 import com.pekalicious.starplanner.StarBlackboard;
@@ -45,10 +44,10 @@ public class TrainingManager {
 							if (supplyDiff >= 0) {
 								if (this.blackBoard.buildPriority < order.unitType.priority) {
 									if (order.unitType == UnitUtils.Type.TERRAN_SCV) {
-										if (Game.getInstance().self().allUnitCount(UnitType.TERRAN_SCV) < 7)
+										//if (Game.getInstance().self().allUnitCount(UnitType.TERRAN_SCV) < 7)
 											order.status = OrderStatus.Next;
-										else
-											Logger.Debug("Build priority is " + this.blackBoard.buildPriority + "\n", 5);
+										//else
+											//Logger.Debug("Build priority is " + this.blackBoard.buildPriority + "\n", 5);
 									}
 								}else{
 									order.status = OrderStatus.Next;

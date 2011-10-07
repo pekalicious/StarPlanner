@@ -44,6 +44,7 @@ public class BuilderManager {
 		
 		toRemove.clear();
 		for (BuildOrder order : blackBoard.buildQueue) {
+			Logger.Debug("BuilderMngr:\tUpdating order " + order.unitType.bwapiType.getName() + "\n", 5);
 			int mineralsDiff = game.self().minerals() - order.unitType.bwapiType.mineralPrice();
 			int gasDiff = game.self().gas() - order.unitType.bwapiType.gasPrice();
 			
@@ -76,10 +77,10 @@ public class BuilderManager {
 					// If enough minerals and gas start building...
 					if (mineralsDiff >= 0) {
 						Logger.Debug("BuilderMngr:\tMinerals OK: " + order.unitType.bwapiType.getName() 
-								+ " (Need:" + order.unitType.bwapiType.mineralPrice() + "/Have:" + game.self().minerals() +")\n", 3);
+								+ " (Need:" + order.unitType.bwapiType.mineralPrice() + "/Have:" + game.self().minerals() +")\n", 5);
 						if (gasDiff >= 0) {
 							Logger.Debug("BuilderMngr:\tGas OK: " + order.unitType.bwapiType.getName() 
-									+ " (Need:" + order.unitType.bwapiType.gasPrice() + "/Have:" + game.self().gas() +")\n", 3);
+									+ " (Need:" + order.unitType.bwapiType.gasPrice() + "/Have:" + game.self().gas() +")\n", 5);
 							order.status = OrderStatus.Next;
 						}
 					}
