@@ -1,68 +1,45 @@
 package com.pekalicious.starplanner.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.bwapi.bridge.model.Position;
 import org.bwapi.bridge.model.Unit;
 
 import com.pekalicious.Logger;
 
-public class GasPatch {
-	private Unit patch;
+/**
+ * Represents a gas patch.
+ * 
+ * @author Panagiotis Peikidis
+ */
+public class GasPatch extends ResourcePatch {
+	/**
+	 * The maximum number of workers that can be assigned to gather gas.
+	 */
+	public static final int TOTAL_WORKERS_PER_GAS_PATCH = 3;
+	
+	/**
+	 * The refinery unit of this gas patch (if available).
+	 */
 	private Unit refinery;
-	private List<Unit> gatherers;
 	
+	/**
+	 * Creates a gas patch.
+	 * @param patch the BWAPI unit to wrap around this class
+	 */
 	public GasPatch(Unit patch) {
-		this.patch = patch;
-		this.gatherers = new ArrayList<Unit>();
+		super(patch, TOTAL_WORKERS_PER_GAS_PATCH);
 	}
 	
-	public boolean isFull() {
-		return this.gatherers.size() == 3;
-	}
-	
-	private List<Unit> died = new ArrayList<Unit>();
-	public void update() {
-		this.died.clear();
-		for (Unit unit : this.gatherers)
-			if (unit.getHitPoints()<=0)
-				this.died.add(unit);
-		
-		for (Unit unit:this.died)
-			this.gatherers.add(unit);
-	}
-
+	/**
+	 * Returns whether or not a refinery has been assigned to this patch.
+	 * @return true if there is a refinery assigned, otherwise false.
+	 */
 	public boolean hasRefinery() {
 		return this.refinery != null;
 	}
 
-	public boolean contains(Unit unit) {
-		return this.gatherers.contains(unit);
-	}
-
-	public boolean isVisible() {
-		return this.patch.isVisible();
-	}
-
-	public Position getPosition() {
-		return this.patch.getPosition();
-	}
-	
-	public Unit getGasUnit() {
-		return this.patch;
-	}
-
-	public void assignWorker(Unit unit) {
-		if (!hasRefinery()) {
-			Logger.Debug("GasPatch:\tCannot gather gas!\n", 1);
-			return;
-		}
-		
-		this.gatherers.add(unit);
-		unit.rightClick(this.refinery);
-	}
-
+	/**
+	 * Assigns a refinery to this patch.
+	 * @param unit the refinery to assign.
+	 */
 	public void setRefinery(Unit unit) {
 		if (this.refinery != null) {
 			Logger.Debug("GasPatch:\tRefinery already set!\n", 1);
@@ -70,8 +47,12 @@ public class GasPatch {
 			this.refinery = unit;
 		}
 	}
-
-	public Unit getPatch() {
-		return this.patch;
+	
+	/**
+	 * Returns the refinery unit of this patch.
+	 * @return the refinery unit of this patch.
+	 */
+	public Unit getRefinery() {
+		return this.refinery;
 	}
 }

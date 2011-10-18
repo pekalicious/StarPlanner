@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="starplanner" default="clean-build">
+<project name="starplanner" default="build-and-deploy">
     <property file="../Build/build.properties" />
     
 	<taskdef name="jsmoothgen"
@@ -53,4 +53,10 @@
             </manifest>
         </jar>
     </target>
+
+	<target name="deploy" depends="build">
+		<copy file="${dist.path}/${starplanner.jar}" todir="C:/Program Files/Starcraft/bwapi-data/AI" />
+	</target>
+	
+	<target name="build-and-deploy" depends="deploy" />
 </project>

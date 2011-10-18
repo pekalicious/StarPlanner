@@ -8,7 +8,6 @@ import org.bwapi.bridge.model.Unit;
 import org.bwapi.bridge.model.UnitType;
 
 import com.pekalicious.Logger;
-import com.pekalicious.starplanner.StarBlackboard;
 
 public class UnitUtils {
 	public static Unit getUnitType(Game game, UnitType type) {
@@ -28,6 +27,7 @@ public class UnitUtils {
 		return unitList;
 	}
 
+	/*
 	public static Unit getIdleWorker(Game game, StarBlackboard blackBoard) {
 		for (Unit unit : UnitUtils.getUnitList(game, UnitType.TERRAN_SCV))
 			if (!blackBoard.isOccupied(unit))
@@ -35,6 +35,7 @@ public class UnitUtils {
 
 		return null;
 	}
+	*/
 	
 	public static Unit getClosestUnitTo(Game game, Unit unit, UnitType type) {
 		Unit closestUnit = null;
@@ -109,5 +110,27 @@ public class UnitUtils {
 				completedUnitList.add(tmp);
 		
 		return completedUnitList;
+	}
+	
+	/**
+	 * Check to see if there is a unit of a specific type on a position
+	 * @param x the x position
+	 * @param y the y position
+	 * @param unitType the type of unit to search
+	 * @return whether the type given was found on the position given
+	 */
+	public static boolean isUnitOnTile(int x, int y, UnitType unitType) {
+		for (Unit unit : Game.getInstance().unitsOnTile(x, y)) {
+			if (unit.getType().equals(unitType)) return true;
+		}
+		
+		return false;
+	}
+	
+	public static Unit getUnitAtPosition(int x, int y, UnitType unitType) {
+		for (Unit unit : Game.getInstance().unitsOnTile(x, y)) {
+			if ( unit.getType().equals(unitType)) return unit;
+		}
+		return null;
 	}
 }

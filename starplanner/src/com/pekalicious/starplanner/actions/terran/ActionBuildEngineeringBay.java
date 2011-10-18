@@ -32,8 +32,7 @@ public class ActionBuildEngineeringBay extends StarAction implements Serializabl
 	@Override
 	public void activateAction(Agent aiManager, WorldState state) {
 		StarBlackboard bb = (StarBlackboard)((StarPlanner)aiManager).getBlackBoard();
-		int buildCount = state.<Integer>getPropertyValue(WSKey.T_ENGINEERINGBAY).getValue();
-		order = bb.addToBuildQueue(UnitUtils.Type.TERRAN_ENGINEERING_BAY, buildCount);
+		order = bb.addToBuildQueue(UnitUtils.Type.TERRAN_ENGINEERING_BAY);
 	}
 
 	int count;

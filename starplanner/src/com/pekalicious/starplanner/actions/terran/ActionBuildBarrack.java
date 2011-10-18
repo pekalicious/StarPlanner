@@ -37,7 +37,7 @@ public class ActionBuildBarrack extends StarAction implements Serializable {
 		int count = Game.getInstance().self().completedUnitCount(UnitType.TERRAN_BARRACKS);
 		if (count == 0) {
 			StarBlackboard bb = (StarBlackboard)((StarPlanner)aiManager).getBlackBoard(); 
-			order = bb.addToBuildQueue(UnitUtils.Type.TERRAN_BARRACKS, 1);
+			order = bb.addToBuildQueue(UnitUtils.Type.TERRAN_BARRACKS);
 		}else{
 			order = new BuildOrder();
 			order.status = OrderStatus.Ended;

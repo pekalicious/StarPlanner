@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bwapi.bridge.model.Unit;
-import org.bwapi.bridge.model.UnitType;
 
 import com.pekalicious.Logger;
 import com.pekalicious.agent.BlackBoard;
 import com.pekalicious.goap.PlannerGoal;
 import com.pekalicious.starplanner.managers.AddonOrder;
 import com.pekalicious.starplanner.managers.BuildOrder;
-import com.pekalicious.starplanner.managers.OrderStatus;
+import com.pekalicious.starplanner.managers.ResourceManager;
 import com.pekalicious.starplanner.managers.TrainingOrder;
 import com.pekalicious.starplanner.model.Squad;
 import com.pekalicious.starplanner.util.UnitUtils;
@@ -48,10 +47,10 @@ public class StarBlackboard implements BlackBoard {
 		addonQueue = new ArrayList<AddonOrder>();
 	}
 	
-	public BuildOrder addToBuildQueue(UnitUtils.Type type, int buildCount) {
-		BuildOrder order = new BuildOrder(type, buildCount);
+	public BuildOrder addToBuildQueue(UnitUtils.Type type) {
+		BuildOrder order = new BuildOrder(type);
 		this.buildQueue.add(order);
-		Logger.Debug("Blackboard:\tAdded to buildQueue: " + buildCount + " " + type.bwapiType.getName() + "\n", 2);
+		Logger.Debug("Blackboard:\tAdded to buildQueue: " + type.bwapiType.getName() + "\n", 2);
 		return order;
 	}
 	
@@ -62,9 +61,9 @@ public class StarBlackboard implements BlackBoard {
 		return order;
 	}
 	
-	public BuildOrder addToBuildQueue(UnitUtils.Type type, Unit onUnit, int buildCount) {
-		Logger.Debug("Blackboard:\tAdded to buildQueue: " + buildCount + " " + type.bwapiType.getName() + "\n", 2);
-		BuildOrder order = new BuildOrder(type, buildCount);
+	public BuildOrder addToBuildQueue(UnitUtils.Type type, Unit onUnit) {
+		Logger.Debug("Blackboard:\tAdded to buildQueue: " + type.bwapiType.getName() + "\n", 2);
+		BuildOrder order = new BuildOrder(type);
 		order.onUnit = onUnit;
 		this.buildQueue.add(order);
 		return order;
@@ -77,6 +76,7 @@ public class StarBlackboard implements BlackBoard {
 		return order;
 	}
 
+	/*
 	public boolean isInBuildQueue(UnitType type) {
 		for (BuildOrder order : buildQueue)
 			if (order.worker != null && order.worker.equals(type)) return true;
@@ -96,5 +96,6 @@ public class StarBlackboard implements BlackBoard {
 		
 		return false;
 	}
+	*/
 
 }

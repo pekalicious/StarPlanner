@@ -6,8 +6,14 @@ import org.bwapi.bridge.model.Position;
 
 import com.pekalicious.Logger;
 import com.pekalicious.starplanner.StarBlackboard;
-import com.pekalicious.starplanner.util.UnitUtils;
 
+/**
+ * This class manages the scouting squad.
+ * 
+ * WARNING: THIS DOES NOT WORK YET!!!!
+ * 
+ * @author Panagiotis Peikidis
+ */
 public class ScoutManager {
 	enum State {
 		Scout, RunningAway
@@ -28,7 +34,7 @@ public class ScoutManager {
 	int previousHitPoints;
 	public void update() {
 		if (blackBoard.scout == null || blackBoard.scout.getHitPoints() <= 0) {
-			blackBoard.scout = UnitUtils.getIdleWorker(game, blackBoard);
+			//blackBoard.scout = UnitUtils.getIdleWorker(game, blackBoard);
 			if (blackBoard.scout == null) {
 				Logger.Debug("Could no assign scout!\n", 1);
 				return;

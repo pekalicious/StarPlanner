@@ -17,6 +17,7 @@ import com.pekalicious.starplanner.managers.SquadManager;
 import com.pekalicious.starplanner.managers.TrainingManager;
 import com.pekalicious.starplanner.sensors.EnemySensor;
 import com.pekalicious.starplanner.sensors.UnitSensor;
+import com.pekalicious.starplanner.util.LocationServices;
 
 public class StarPlanner extends Agent {
 	protected GoalManager goalManager;
@@ -28,12 +29,10 @@ public class StarPlanner extends Agent {
 	
 	// Actuators
     protected BuildPlanManager buildPlanManager;
-    private BuilderManager builderManager;
     private TrainingManager trainingManager;
     private AddonManager addonManager;
     
     // Managers
-	private ResourceManager resourceManager;
 	@SuppressWarnings("unused")
 	private ScoutManager scoutManager;
 	private BattleManager battleManager;
@@ -53,8 +52,8 @@ public class StarPlanner extends Agent {
 		this.buildPlanManager = new BuildPlanManager(this);
 		
 		if (game == null) return;
-		this.resourceManager = new ResourceManager(this.game, (StarBlackboard) this.blackBoard);
-		this.builderManager = new BuilderManager(this.game, (StarBlackboard) this.blackBoard, this.resourceManager.getBaseManagers());
+		ResourceManager.Instance.Init(this.game, (StarBlackboard) this.blackBoard);
+		BuilderManager.Instance.Init(this.game, (StarBlackboard) this.blackBoard, ResourceManager.Instance.getBaseManagers());
 		this.trainingManager = new TrainingManager(this.game, (StarBlackboard) this.blackBoard);
 		//this.scoutManager = new ScoutManager(this.game, (StarBlackboard) this.blackBoard);
 		this.addonManager = new AddonManager(this.game, (StarBlackboard) this.blackBoard);
@@ -62,7 +61,7 @@ public class StarPlanner extends Agent {
 		
 		this.battleManager = new BattleManager(this.game);
 		this.unitSensor = new UnitSensor(this.workingMemory);
-		this.enemySensor = new EnemySensor(this.resourceManager, this.workingMemory);
+		this.enemySensor = new EnemySensor(this.workingMemory);
 	}
 	
 	public StarPlanner(String path) {
@@ -80,12 +79,14 @@ public class StarPlanner extends Agent {
 	
 	public void update(Game game) {
 		updateWorldState(game);
+		
+		LocationServices.Instance.update();
+		ResourceManager.Instance.update();
 
 		this.buildPlanManager.update();
 		this.strategicManager.update();
 
-		this.resourceManager.update();
-		this.builderManager.update();
+		BuilderManager.Instance.update();
 		this.trainingManager.update();
 		this.addonManager.update();
 		//this.scoutManager.update();

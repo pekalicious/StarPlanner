@@ -37,7 +37,7 @@ public class ActionBuildFactory extends StarAction {
 
 		if (count == 0) {
 			StarBlackboard bb = (StarBlackboard)((StarPlanner)aiManager).getBlackBoard(); 
-			order = bb.addToBuildQueue(UnitUtils.Type.TERRAN_FACTORY, count);
+			order = bb.addToBuildQueue(UnitUtils.Type.TERRAN_FACTORY);
 		}else{
 			order = new BuildOrder();
 			order.status = OrderStatus.Ended;

@@ -22,13 +22,13 @@ public class EnemySensor {
     
 	private static final int distanceThreshold = 40;
 	
-    public EnemySensor(ResourceManager resourceManager, WorkingMemory workingMemory) {
+    public EnemySensor(WorkingMemory workingMemory) {
         this.workingMemory = workingMemory;
         
-        List<BaseManager> bases = new ArrayList<BaseManager>(resourceManager.getBaseManagers());
+        List<BaseManager> bases = new ArrayList<BaseManager>(ResourceManager.Instance.getBaseManagers());
         Collections.reverse(bases);
         for (BaseManager baseManager : bases) {
-        	if (!baseManager.isPlayers()) {
+        	if (!baseManager.isPlayersBase()) {
         		StarMemoryFact fact = new StarMemoryFact(StarMemoryFactType.ENEMY_BASE);
         		// TODO: If base is visible and enemy is near, confidence = 1.0
         		fact.confidence = 0.5;

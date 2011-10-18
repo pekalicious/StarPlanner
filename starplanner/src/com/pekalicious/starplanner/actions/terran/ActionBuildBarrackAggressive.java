@@ -1,6 +1,8 @@
 package com.pekalicious.starplanner.actions.terran;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.bwapi.bridge.model.Game;
 import org.bwapi.bridge.model.UnitType;
@@ -19,7 +21,7 @@ import com.pekalicious.starplanner.util.UnitUtils;
 public class ActionBuildBarrackAggressive extends StarAction implements Serializable {
 	private static final long serialVersionUID = -5642592102727574486L;
 
-	BuildOrder order;
+	private List<BuildOrder> orders;
 	
 	@Override
 	public void setupConditions() {
@@ -36,18 +38,25 @@ public class ActionBuildBarrackAggressive extends StarAction implements Serializ
 	public void activateAction(Agent aiManager, WorldState state) {
 		int count = Game.getInstance().self().completedUnitCount(UnitType.TERRAN_BARRACKS);
 		if (count < 3) {
-			StarBlackboard bb = (StarBlackboard)((StarPlanner)aiManager).getBlackBoard(); 
-			order = bb.addToBuildQueue(UnitUtils.Type.TERRAN_BARRACKS, 3);
+			StarBlackboard bb = (StarBlackboard)((StarPlanner)aiManager).getBlackBoard();
+			for ( int i = 0; i < 3 - count; i++){
+				orders.add(bb.addToBuildQueue(UnitUtils.Type.TERRAN_BARRACKS));
+			}
 		}else{
-			order = new BuildOrder();
-			order.status = OrderStatus.Ended;
+			orders = new ArrayList<BuildOrder>();
+			orders.add(new BuildOrder());
+			orders.get(0).status = OrderStatus.Ended;
 		}
 	}
 
 	int count;
 	@Override
 	public boolean isActionComplete(Agent aiManager) {
-		return order.status == OrderStatus.Ended;
+		for (BuildOrder order : orders)
+			if (order.status != OrderStatus.Ended) 
+				return false;
+		
+		return true;
 	}
 	
 	@Override

@@ -37,7 +37,7 @@ public class ActionBuildAcademy extends StarAction implements Serializable {
 		int count = Game.getInstance().self().completedUnitCount(UnitType.TERRAN_ACADEMY);
 		if (count == 0) {
 			StarBlackboard bb = (StarBlackboard)((StarPlanner)aiManager).getBlackBoard(); 
-			order = bb.addToBuildQueue(UnitUtils.Type.TERRAN_ACADEMY, 1);
+			order = bb.addToBuildQueue(UnitUtils.Type.TERRAN_ACADEMY);
 		}else{
 			order = new BuildOrder();
 			order.status = OrderStatus.Ended;

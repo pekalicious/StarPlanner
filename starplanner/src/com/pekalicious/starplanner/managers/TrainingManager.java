@@ -38,24 +38,26 @@ public class TrainingManager {
 
 			switch (order.status) {
 				case Idle:
-					if (game.self().minerals() >= order.unitType.bwapiType.mineralPrice()) {
-						if (game.self().gas() >= order.unitType.bwapiType.gasPrice()) {
+					if (ResourceManager.Instance.getFreeMinerals() >= order.unitType.bwapiType.mineralPrice()) {
+						if (ResourceManager.Instance.getFreeGas() >= order.unitType.bwapiType.gasPrice()) {
 							int supplyDiff = (game.self().supplyTotal()/2) - ((game.self().supplyUsed()/2)+order.unitType.bwapiType.supplyRequired());
 							if (supplyDiff >= 0) {
 								if (this.blackBoard.buildPriority < order.unitType.priority) {
 									if (order.unitType == UnitUtils.Type.TERRAN_SCV) {
 										//if (Game.getInstance().self().allUnitCount(UnitType.TERRAN_SCV) < 7)
 											order.status = OrderStatus.Next;
+											ResourceManager.Instance.addToOrdersQueue(order);
 										//else
 											//Logger.Debug("Build priority is " + this.blackBoard.buildPriority + "\n", 5);
 									}
 								}else{
 									order.status = OrderStatus.Next;
+									ResourceManager.Instance.addToOrdersQueue(order);
 								}
 							}else{
 								if (supplyOrder == null || supplyOrder.status == OrderStatus.Ended) {
 									Logger.Debug("TrainManager:\tAdding Supply Depot\n", 2);
-									supplyOrder = blackBoard.addToBuildQueue(UnitUtils.Type.TERRAN_SUPPLY_DEPOT, 1);
+									supplyOrder = blackBoard.addToBuildQueue(UnitUtils.Type.TERRAN_SUPPLY_DEPOT);
 								}
 							}
 						}else{
@@ -72,6 +74,7 @@ public class TrainingManager {
 					for (Unit building : whatBuilds) {
 						if (building.getTrainingQueue().size() == 0 && building.isCompleted()) {
 							building.train(order.unitType.bwapiType);
+							ResourceManager.Instance.removeFromOrdersQueue(order);
 							order.unitCount--;
 							order.waitingFor++;
 							Logger.Debug("TrainManager:\tFound empty queue. Training " + order.unitType.bwapiType.getName() + "...\n", 4);
@@ -111,7 +114,7 @@ public class TrainingManager {
 			if (order.unitType.bwapiType.equals(unit.getType())) {
 				if (order.waitingFor > 0) {
 					Logger.Debug("TrainManager:\tAdding to trained units: " + unit.getType().getName() + "\n", 3);
-					order.units.add(unit);
+					order.completedUnits.add(unit);
 					order.waitingFor--;
 					found = true;
 					if (order.waitingFor == 0 && order.unitCount == 0)

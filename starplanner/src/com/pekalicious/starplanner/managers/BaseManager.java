@@ -13,58 +13,62 @@ import org.bwapi.bridge.model.UnitType;
 
 import com.pekalicious.Logger;
 import com.pekalicious.starplanner.StarBlackboard;
+import com.pekalicious.starplanner.agents.Worker;
 import com.pekalicious.starplanner.model.GasPatch;
 import com.pekalicious.starplanner.model.MineralPatch;
 import com.pekalicious.starplanner.util.UnitUtils;
 
 public class BaseManager {
-	private List<MineralPatch> mineralPatches;
-	private int maxMineralGatherers;
-	private int maxRefineryWorkers;
-	private List<GasPatch> gasPatches;
-	@SuppressWarnings("unused")
-	private int maxGasGatherers;
-	private Unit base;
-	private BaseLocation location;
-	private List<Unit> buildings;
-	private StarBlackboard blackboard;
-	private List<Unit> workers;
-	private Player owner;
+	private Unit 				base;
+	private BaseLocation 		location;
+	private List<MineralPatch> 	mineralPatches;
+	private List<GasPatch> 		gasPatches;
 	
+	private List<Unit> 			buildingOrders;
+	private List<Worker> 		workers;
+	
+
+	private int 				maxMineralGatherers;
+	private int 				maxRefineryWorkers;
+
+	private StarBlackboard 		blackboard;
+	private Player 				owner;
+	
+	private TrainingOrder 		workerOrder;
+	private BuildOrder 			refineryOrder;
+	private List<BuildOrder> 	orders;
+	private List<BuildOrder> 	ordersToRemove;
+
 	public BaseManager(BaseLocation location, StarBlackboard blackboard) {
 		this.location = location;
 		this.blackboard = blackboard;
-		this.workers = new ArrayList<Unit>();
-		this.buildings = new ArrayList<Unit>();
+		this.workers = new ArrayList<Worker>();
+		this.buildingOrders = new ArrayList<Unit>();
+		this.workerOrder = null;
+		this.refineryOrder = null;
+		this.orders = new ArrayList<BuildOrder>();
+		this.ordersToRemove = new ArrayList<BuildOrder>();
 		
-		this.mineralPatches = new ArrayList<MineralPatch>();
+		//Initialize resources near base location
+		this.setMineralPatches(new ArrayList<MineralPatch>());
 		for (Unit patch : location.getMinerals())
-			this.mineralPatches.add(new MineralPatch(patch));
-		this.maxMineralGatherers = this.mineralPatches.size() * 2;
-		this.maxRefineryWorkers = 10;
-		if (this.maxMineralGatherers < this.maxRefineryWorkers)
-			this.maxRefineryWorkers = this.maxMineralGatherers;
-		
-		this.gasPatches = new ArrayList<GasPatch>();
+			this.getMineralPatches().add(new MineralPatch(patch));
+		this.maxMineralGatherers = this.getMineralPatches().size() * 2;
+
+		this.setGasPatches(new ArrayList<GasPatch>());
 		for (Unit patch : location.getGeysers())
-			this.gasPatches.add(new GasPatch(patch));
-		this.maxGasGatherers = this.gasPatches.size() * 3;
+			this.getGasPatches().add(new GasPatch(patch));
+		this.maxRefineryWorkers = this.getGasPatches().size() * 3;
+		Logger.Debug("BaseMngr:\tResources found: " + getMineralPatches().size() + "M/" + getGasPatches().size() + "G\n", 1);
 		
-		Logger.Debug("BaseMngr:\tInitialized base with " + mineralPatches.size() + "M/" + gasPatches.size() + "G\n", 1);
+		//Does this base have a command center?
 		int x = location.getTilePosition().x();
 		int y = location.getTilePosition().y();
-		boolean found = false;
-		for (Unit unit : Game.getInstance().unitsOnTile(x, y)) {
-			if (unit.getType().equals(UnitType.TERRAN_COMMAND_CENTER)) {
-				base = unit;
-				found = true;
-				break;
-			}
-		}
-		
-		if (found) {
+		Unit baseUnit = UnitUtils.getUnitAtPosition(x, y, UnitType.TERRAN_COMMAND_CENTER);
+		if ( baseUnit != null ) {
 			Logger.Debug("BaseMngr:\tWith command center!\n", 1);
-			this.owner = Game.getInstance().self();
+			this.base = baseUnit;
+			this.owner = baseUnit.getPlayer();
 		}else{
 			Logger.Debug("BaseMngr:\tWithout command center...\n", 1);
 		}
@@ -74,37 +78,25 @@ public class BaseManager {
 		this.owner = owner;
 	}
 	
-	public boolean isPlayers() {
+	public boolean isPlayersBase() {
 		return this.owner != null && this.owner.equals(Game.getInstance().self());
 	}
 	
-	private List<BuildOrder> orders = new ArrayList<BuildOrder>();
-	public void addBuildOrder(BuildOrder newOrder){
+	public boolean assignBuildOrderToWorker(BuildOrder newOrder){
 		if (this.workers.size() == 0) {
 			Logger.Debug("BaseMngr:\tNo workers!\n", 1);
-			return;
+			return false;
 		}
 		
-		Unit worker = null;
-		for (Unit unit : this.workers) {
-			boolean free = true;
-			for (BuildOrder order : orders)
-				if (order.worker.equals(unit))
-					free = false;
-			if (free) {
-				worker = unit;
-				break;
+		for (Worker worker : workers) {
+			if (!worker.hasBuildQueued()) {
+				worker.startBuilding(newOrder);
+				return true;
 			}
 		}
 		
-		if (worker != null) {
-			newOrder.worker = worker;
-			newOrder.baseManager = this;
-			if (!this.orders.contains(newOrder))
-				this.orders.add(newOrder);
-		}else{
-			Logger.Debug("BaseMngr:\tCould not find free worker!\n", 1);
-		}
+		Logger.Debug("BaseMngr:\tCould not find free worker!\n", 1);
+		return false;
 	}
 	
 	public boolean hasBase() {
@@ -115,34 +107,28 @@ public class BaseManager {
 		return this.location.getPosition();
 	}
 	
-	private TrainingOrder workerOrder;
-	private BuildOrder refineryOrder;
-	private List<BuildOrder> toRemove = new ArrayList<BuildOrder>();
 	public void update() {
-		for (MineralPatch mineral : this.mineralPatches)
-			mineral.update();
-		for (GasPatch gas : this.gasPatches)
-			gas.update();
+		for (Worker worker : this.workers)
+			worker.update();
 		
-		this.toRemove.clear();
+		this.ordersToRemove.clear();
 		for (BuildOrder order : this.orders) {
 			if (order.status == OrderStatus.Ended) {
-				for (Unit unit : order.completedUnits) {
-					this.buildings.add(unit);
-				}
-				this.toRemove.add(order);
-				goBackToWork(order.worker);
-				Logger.Debug("BaseMngr:\tBase has now " + this.buildings.size() + " buildings\n", 3);
+				this.buildingOrders.add(order.completedUnit);
+				this.ordersToRemove.add(order);
+				//goBackToWork(order.worker);
+				Logger.Debug("BaseMngr:\tBase has now " + this.buildingOrders.size() + " buildings\n", 3);
 			}
 		}
-		for (BuildOrder order : this.toRemove)
+		for (BuildOrder order : this.ordersToRemove)
 			this.orders.remove(order);
 		
 		if (this.base == null) return;
 		if (isFull()) return;
 		Logger.Debug("BaseMngr:\tBase not full\n", 5);
 		
-		if (this.workers.size() >= this.maxRefineryWorkers && needRefinery()) {
+		/*
+		if (this.oldWorkers.size() >= this.maxRefineryWorkers && needRefinery()) {
 			if (this.refineryOrder == null) {
 				GasPatch freePatch = null;
 				for (GasPatch patch : this.gasPatches) {
@@ -179,22 +165,28 @@ public class BaseManager {
 				}
 			}
 		}else{
+		*/
 			if (this.workerOrder == null) {
 				Logger.Debug("BaseMngr:\tTraining new worker\n", 3);
 				this.workerOrder = new TrainingOrder(UnitUtils.Type.TERRAN_SCV, 1);
 				this.blackboard.trainingQueue.add(this.workerOrder);
 			}else{
 				if (this.workerOrder.status == OrderStatus.Ended) {
-					for (Unit unit : this.workerOrder.units)
-						assignToWork(unit);
+					for (Unit unit : this.workerOrder.completedUnits) {
+						Worker worker = new Worker(unit, this);
+						assignToWork(worker);
+						workers.add(worker);
+					}
 					this.workerOrder = null;
 				}
 			}
+			/*
 		}
+		*/
 	}
 	
 	private boolean needRefinery() {
-		for (GasPatch patch : this.gasPatches)
+		for (GasPatch patch : this.getGasPatches())
 			if (!patch.hasRefinery()) return true;
 		
 		return false;
@@ -203,7 +195,7 @@ public class BaseManager {
 	private boolean canAssignToGas() {
 		if (isGasFull()) return false;
 		
-		for (GasPatch patch : this.gasPatches)
+		for (GasPatch patch : this.getGasPatches())
 			if (patch.hasRefinery()) return true;
 		
 		return false;
@@ -214,134 +206,52 @@ public class BaseManager {
 	}
 	
 	private boolean isMineralsFull() {
-		for (MineralPatch patch : this.mineralPatches)
+		for (MineralPatch patch : this.getMineralPatches())
 			if (!patch.isFull()) return false;
 		
 		return true;
 	}
 	
 	private boolean isGasFull() {
-		for (GasPatch patch : this.gasPatches)
+		for (GasPatch patch : this.getGasPatches())
 			if (!patch.isFull()) return false;
 		
 		return true;
 	}
 	
 	public boolean isAssignedToThisBase(Unit unit) {
-		for (MineralPatch patch : this.mineralPatches)
-			if (patch.contains(unit))
-				return true;
-		
-		for (GasPatch patch : this.gasPatches)
-			if (patch.contains(unit))
-				return true;
+		for (Worker worker : this.workers)
+			if (worker.getUnit().equals(unit)) return true;
 		
 		return false;
 	}
 	
-	private void goBackToWork(Unit unit) {
-		for (MineralPatch patch : this.mineralPatches) {
-			if (patch.contains(unit)) {
-				unit.rightClick(patch.getPatch());
-				return;
-			}
-		}
-
-		for (GasPatch patch : this.gasPatches) {
-			if (patch.contains(unit)) {
-				unit.rightClick(patch.getPatch());
-				return;
-			}
-		}
-		
-		Logger.Debug("BaseMngr:\tWorker not in this base!\n", 1);
-	}
-	
-	public void assignToWork(Unit unit) {
-		if (isFull()) {
-			Logger.Debug("BaseMngr:\tBase Full!\n", 1);
-			return;
-		}
-		
-		if (canAssignToGas())
-			assignToClosestGas(unit);
-		else if (!isMineralsFull())
-			assignToClosestMineral(unit);
-		else
-			Logger.Debug("BaseMngr:\tCould not assign worker!\n", 1);
+	public void assignToWork(Worker worker) {
+		this.workers.add(worker);
 	}
 
-	private void assignToClosestMineral(Unit unit) {
-		if (isMineralsFull()) {
-			Logger.Debug("BaseMngr:\tMinerals full!\n", 1);
-			return;
-		}
-		
-		MineralPatch patch = null;
-		double closest = Double.MAX_VALUE;
-		
-		for (MineralPatch mineralPatch : this.mineralPatches) {
-			if (!mineralPatch.isVisible()) continue;
-			if (mineralPatch.isFull()) continue;
-			
-			double dx = unit.getPosition().x() - mineralPatch.getPosition().x();
-			double dy = unit.getPosition().y() - mineralPatch.getPosition().y();
-			double dist = Math.sqrt(dx*dx + dy*dy); 
-
-			if (dist < closest) {
-				patch = mineralPatch;
-				closest = dist;
-			}
-		}
-		
-		if (patch != null) {
-			Logger.Debug("BaseMngr:\tAssigning " + unit + " to patch " + patch + "\n", 3);
-			patch.assignWorker(unit);
-			this.workers.add(unit);
-		}else{
-			Logger.Debug("BaseMngr:\tCould not find mineral patch!\n", 1);
-		}
-	}
-
-	private void assignToClosestGas(Unit unit) {
-		if (isGasFull()) {
-			Logger.Debug("BaseMngr:\tGas full!\n", 1);
-			return;
-		}
-		
-		GasPatch patch = null;
-		double closest = Double.MAX_VALUE;
-		
-		for (GasPatch gasPatch : this.gasPatches) {
-			if (!gasPatch.isVisible()) continue;
-			if (gasPatch.isFull()) continue;
-			
-			double dx = unit.getPosition().x() - gasPatch.getPosition().x();
-			double dy = unit.getPosition().y() - gasPatch.getPosition().y();
-			double dist = Math.sqrt(dx*dx + dy*dy); 
-
-			if (dist < closest) {
-				patch = gasPatch;
-				closest = dist;
-			}
-			
-		}
-		
-		if (patch != null) {
-			Logger.Debug("BaseMngr:\tAssigning " + unit + " to patch " + patch + "\n", 3);
-			patch.assignWorker(unit);
-			this.workers.add(unit);
-		}else{
-			Logger.Debug("BaseMngr:\tCould not find mineral patch!\n", 1);
-		}
-		
-	}
 
 	public int getBuildingsCount() {
-		return this.buildings.size();
+		return this.buildingOrders.size();
 	}
 
 	public TilePosition getTilePosition() {
 		return this.location.getTilePosition();
+	}
+
+	public List<MineralPatch> getMineralPatches() {
+		return mineralPatches;
+	}
+
+	public void setMineralPatches(List<MineralPatch> mineralPatches) {
+		this.mineralPatches = mineralPatches;
+	}
+
+	public List<GasPatch> getGasPatches() {
+		return gasPatches;
+	}
+
+	public void setGasPatches(List<GasPatch> gasPatches) {
+		this.gasPatches = gasPatches;
 	}
 }

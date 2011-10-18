@@ -37,7 +37,7 @@ public class ActionBuildArmory extends StarAction {
 
 		if (count == 0) {
 			StarBlackboard bb = (StarBlackboard)((StarPlanner)aiManager).getBlackBoard(); 
-			order = bb.addToBuildQueue(UnitUtils.Type.TERRAN_ARMORY, count);
+			order = bb.addToBuildQueue(UnitUtils.Type.TERRAN_ARMORY);
 		}else{
 			order = new BuildOrder();
 			order.status = OrderStatus.Ended;

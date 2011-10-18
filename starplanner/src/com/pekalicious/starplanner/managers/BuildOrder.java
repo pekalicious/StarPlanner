@@ -1,35 +1,49 @@
 package com.pekalicious.starplanner.managers;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.bwapi.bridge.model.Order;
 import org.bwapi.bridge.model.TilePosition;
 import org.bwapi.bridge.model.Unit;
 
 import com.pekalicious.starplanner.util.UnitUtils;
 
-public class BuildOrder {
-	public Unit worker;
-	public UnitUtils.Type unitType;
-	public TilePosition startPosition;
+/**
+ * A building resource order.
+ * 
+ * @author Panagiotis Peikidis
+ */
+public class BuildOrder extends ResourceOrder {
+	//public TilePosition startPosition;
 	public TilePosition buildPosition;
+	/**
+	 * The building unit used during construction. The building in this state isn't completed yet.
+	 */
 	public Unit buildUnit;
-	public OrderStatus status;
-	public int buildCount;
+	/**
+	 * The actual unit when the building has ended.
+	 */
+	public Unit completedUnit;
+	/**
+	 * Used when a building is built on top of another unit (i.e. refinery on top of gas geysers)
+	 */
 	public Unit onUnit;
-	public Order previousOrder;
-	public List<Unit> completedUnits;
+	/**
+	 * The base manager that the building will be assigned to when finished.
+	 */
 	public BaseManager baseManager;
 
+	/**
+	 * Constructs empty Build Order
+	 */
 	public BuildOrder() {
 		
 	}
 	
-	public BuildOrder(UnitUtils.Type unitType, int buildCount) {
+	/**
+	 * Constructs a build order with the associated unit type.
+	 * 
+	 * @param unitType the unit type to build.
+	 */
+	public BuildOrder(UnitUtils.Type unitType) {
 		this.unitType = unitType;
 		this.status = OrderStatus.Idle;
-		this.buildCount = buildCount;
-		this.completedUnits = new ArrayList<Unit>();
 	}
 }
